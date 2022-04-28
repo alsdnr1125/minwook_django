@@ -1,0 +1,22 @@
+{%load static%}
+<link rel="stylesheet" href="{%static 'signup.css'%}">
+login page
+
+<br>
+<img src="{%static 'gerrard.jpg'%}" alt="">
+{%if user.is_authenticated%}
+
+    Complete!!
+    Welcome {{user.username}}!!!
+    <a href="{%url 'user:logout'%}">LOGOUT</a>
+{%else%}
+
+<form action="http://127.0.0.1:8000/auth/upload" method="POST">
+    {% csrf_token %}
+    <input  name="username" type="text">
+    <input  name="password" type="password">
+    <input  type="submit" value="Login">
+</form>
+<a href="{%url 'user:signup'%}">SIGNUP</a>
+
+{%endif%}
