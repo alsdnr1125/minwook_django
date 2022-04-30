@@ -28,13 +28,12 @@ def signup_view(request):
 	if request.method == "POST":
 		username = request.POST["username"]
 		password = request.POST["password"]
-		firstname = request.POST["firstname"]
-		lastname = request.POST["lastname"]
+		name = request.POST["name"]
+		user_id = request.POST["user_id"]
 
 		user = User.objects.create_user(username, password)
-		user.last_name = lastname
-		user.first_name = firstname
-		user.username = username
+		user.name = name
+		user.user_id = user_id
 		user.save()
 
 		# os.mkdir(f"mysite/media/{username}")
