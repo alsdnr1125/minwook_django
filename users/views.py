@@ -30,13 +30,11 @@ def signup_view(request):
 		password = request.POST["password"]
 		firstname = request.POST["firstname"]
 		lastname = request.POST["lastname"]
-		email = request.POST["email"]
-		user_id = request.POST["user_id"]
 
-		user = User.objects.create_user(username, email, password)
+		user = User.objects.create_user(username, password)
 		user.last_name = lastname
 		user.first_name = firstname
-		user.user_id = user_id
+		user.username = username
 		user.save()
 
 		# os.mkdir(f"mysite/media/{username}")
