@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 
+from .forms import UploadForm
+import os
 
 from .models import User
 
@@ -48,3 +50,16 @@ def return_user(request):
 
 def index(request):
 	return render(request, "users/index.html", {})
+
+def image_list(request):
+	return render(request, "users/list.html", {})
+
+def upload_image(request):
+	if request.method == 'POST':
+		form = UploadForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return redirect('user:image_list')
+	else:
+		form = UploadForm()
+	return render(request, "users/upload.html", {'form': form})
