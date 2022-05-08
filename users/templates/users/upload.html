@@ -1,6 +1,10 @@
 
 
+
 {%block content%}
+
+    <h1>Welcome {{user.username}}!!!</h1>
+    <a href="{%url 'user:logout'%}">LOGOUT</a>
     <h2>Upload image</h2>
     <form method="post" enctype="multipart/form-data">
         {%csrf_token%}
