@@ -3,26 +3,34 @@ from django.contrib.auth import authenticate, login, logout
 
 from .forms import UploadForm
 import os
-
 from .models import User
 
+import logging #파이썬 로깅 모듈 임포트
 
-# Create your views here.
+#settings.py 파일에서 설정된 로거를 취득함
+logger = logging.getLogger('mylogger')
+
+def my_view(request, arg1, arg2):
+    #view logic
+    if bad_mogo:
+        logger.error('Something went worng!')  # ERROR 레벨의 로그 레코드를 생성함
+
 def login_view(request):
 	if request.method == "POST":
 		username = request.POST["username"]
 		password = request.POST["password"]
-		user = authenticate(username=username, password=password)
+		user = authenticate(request, username=username, password=password)
 		if user is not None:
 			print("Complete")
 			login(request, user)
 		else:
 			print("Fail")
-	return render(request, "users/login.html")
+	else:
+		return render(request, "users/login.html")
 
 
 def logout_view(request):
-	logout(request)
+	authenticate.logout(request)
 	return redirect("user:login")
 
 
@@ -33,14 +41,11 @@ def signup_view(request):
 		name = request.POST["name"]
 		user_id = request.POST["user_id"]
 
-		user = User.objects.create_user(username, password)
+		user = User.objects.create_user(username, password, name)
 		user.name = name
-		user.user_id = user_id
+		user_id = user_id
 		user.save()
-
-		# os.mkdir(f"mysite/media/{username}")
 		return redirect("user:login")
-
 	return render(request, "users/signup.html")
 
 

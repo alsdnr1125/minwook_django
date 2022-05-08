@@ -1,16 +1,19 @@
 {%load static%}
 Signup page
-
+{% block content %}
 <br>
 <form action="" method="POST">
     {%csrf_token%}
-    <p>아이디</p>
+    <p>ID</p>
     <input  name="username" type="text">
-    <p>비밀번호</p>
-    <input name="password" type="password">
+    <p>PASSWORD</p>
+    <input name="password1" type="password">
+    <p>CONFIRM PASSWORD</p>
+    <input name="password2" type="password">
     <p>이름</p>
     <input  name="name" type="text">
     <p>학번</p>
     <input name="user_id" type="text">
     <input type="submit" value="SIGNUP">
 </form>
+{% endblock%}

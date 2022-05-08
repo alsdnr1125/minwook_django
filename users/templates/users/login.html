@@ -2,20 +2,11 @@
 <link rel="stylesheet" href="{%static 'signup.css'%}">
 login page
 
-<br>
-{%if user.is_authenticated%}
 
-    Complete!!
-    Welcome {{user.username}}!!!
-    <a href="{%url 'user:logout'%}">LOGOUT</a>
-{%else%}
-
-<form action="http://ec2-54-180-123-195.ap-northeast-2.compute.amazonaws.com:8080/upload" method="POST">
+<form action="http://127.0.0.1:8000/upload" method="POST">
     {% csrf_token %}
     <input  name="username" type="text">
     <input  name="password" type="password">
-    <input  type="submit" value="Login">
+    <input type="submit" class="btn btn-primary" value="Login">
 </form>
 <a href="{%url 'user:signup'%}">SIGNUP</a>
-
-{%endif%}
