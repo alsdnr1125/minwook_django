@@ -54,7 +54,7 @@ def return_user(request):
 
 
 def index(request):
-	return render(request, "users/index.html", {})
+	return render(request, "users/index.html")
 
 def image_list(request):
 	return render(request, "users/list.html", {})
